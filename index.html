@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fretboard Note Trainer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rokkitt:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="score-strip">
+      <h1>Guitar Fretboard Study Tool</h1>
+      <div class="score-values">
+        <p><span class="score-label">Score</span> <strong id="scoreFraction">0 / 0</strong></p>
+        <p><span class="score-label">Percent</span> <strong id="scorePercent">0.0%</strong></p>
+        <p><span class="score-label">Time Left</span> <strong id="timerValue">No limit</strong></p>
+      </div>
+    </header>
+
+    <section class="controls card">
+      <div class="actions">
+        <button id="settingsBtn" type="button">Session Settings</button>
+        <button id="startBtn" type="button">Start Session</button>
+        <button id="endBtn" type="button" disabled>End Session</button>
+        <p id="sessionInfo">Open settings, then press Start Session.</p>
+      </div>
+    </section>
+
+    <dialog id="settingsDialog" class="settings-dialog">
+      <form method="dialog" class="settings-panel">
+        <div class="settings-header">
+          <h2>Session Settings</h2>
+          <button id="closeSettingsBtn" type="submit" class="close-settings-btn">Close</button>
+        </div>
+
+        <div class="control-grid">
+          <label class="field">
+            Study mode
+            <select id="studyMode">
+              <option value="free">Free Study</option>
+              <option value="timed">Timed</option>
+              <option value="questions">Number of Questions</option>
+              <option value="timed-questions">Timed + Number of Questions</option>
+            </select>
+          </label>
+
+          <label class="field" id="minutesField">
+            Minutes
+            <input id="minutesInput" type="number" min="1" value="2">
+          </label>
+
+          <label class="field" id="questionCountField">
+            Question Count
+            <input id="questionCountInput" type="number" min="1" value="30">
+          </label>
+        </div>
+
+        <fieldset class="question-types">
+          <legend>Question Types</legend>
+          <label><input type="checkbox" value="note-id" checked> Identify note at red dot</label>
+          <label><input type="checkbox" value="find-note" checked> Click the target note on a string</label>
+          <label><input type="checkbox" value="name-string" checked> Name the string from note + fret</label>
+        </fieldset>
+
+        <fieldset class="question-types">
+          <legend>Wrong Answer Behavior</legend>
+          <label><input type="radio" name="wrongAnswerMode" value="reveal-next" checked> Show right answer and move to next question</label>
+          <label><input type="radio" name="wrongAnswerMode" value="retry-until-correct"> Mark red and retry until correct</label>
+        </fieldset>
+      </form>
+    </dialog>
+
+    <section class="study-layout">
+      <article id="promptCard" class="prompt card">
+        <h2 id="questionPrompt">Ready to start?</h2>
+        <div id="answerArea" class="answer-area">
+          <p>Set your mode and question types, then begin.</p>
+        </div>
+        <p id="feedback" class="feedback"></p>
+      </article>
+
+      <article class="fretboard-wrap card">
+        <h2>Fretboard (Standard Tuning: E A D G B E)</h2>
+        <div id="fretboardContainer" class="fretboard-container"></div>
+      </article>
+    </section>
+
+    <section class="tips card">
+      <h2>Hints &amp; Tips</h2>
+      <div class="tips-grid">
+        <article>
+          <h3>Start With Landmarks</h3>
+          <p>Memorize notes on frets 0, 3, 5, 7, and 12 first. They repeat and anchor your map.</p>
+        </article>
+        <article>
+          <h3>Learn Open Strings Cold</h3>
+          <p>Know E A D G B E instantly. Every fretboard answer grows from these six notes.</p>
+        </article>
+        <article>
+          <h3>Use One String At A Time</h3>
+          <p>Master one string up to the 12th fret, then move to the next string.</p>
+        </article>
+        <article>
+          <h3>Say Notes Out Loud</h3>
+          <p>Speaking the answer while clicking or typing reinforces memory faster.</p>
+        </article>
+        <article>
+          <h3>Track Accuracy Before Speed</h3>
+          <p>In free mode, focus on correct answers first. Add timers after your accuracy rises.</p>
+        </article>
+        <article>
+          <h3>Sharps And Flats</h3>
+          <p>Typed answers accept enharmonic spellings (for example, Db counts as C#).</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
